@@ -1,4 +1,5 @@
 class Patron
+  
   attr_reader(:id, :name, :birthday)
 
   def initialize(attributes)

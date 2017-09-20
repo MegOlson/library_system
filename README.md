@@ -4,7 +4,7 @@
 
 ## Specifications
 
-* Program creates instance of book with Book class when given title and author.
+<!-- * Program creates instance of book with Book class when given title and author.
   * Example Input: "Emma", "Jane Austen"
   * Example Output: "Emma", "Jane Austen"
 * Program saves each book and details to database.
@@ -21,7 +21,7 @@
   * Example Output: [patron]
 * Program returns list of patrons.
   * Example Input: Patron.all()
-  * Example Output: [patron1, patron2]
+  * Example Output: [patron1, patron2] -->
 * Program allows user to search for book by author within database.
   * Example Input: book.search(:author)
   * Example Output: [book1, book2, book3]

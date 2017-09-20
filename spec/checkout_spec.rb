@@ -17,12 +17,6 @@ describe("Checkout") do
       checkout.save()
       expect(Checkout.all()).to(eq([checkout]))
     end
-    # it("updates a saved checkout") do
-    #   checkout.save
-    #   checkout.checked_in = true
-    #   checkout.save
-    #   expect(Checkout.all).to eq ([checkout])
-    # end
   end
 
   describe("#==") do

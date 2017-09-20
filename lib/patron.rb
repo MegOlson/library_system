@@ -1,6 +1,7 @@
 class Patron
 
-  attr_reader(:id, :name, :birthday)
+  attr_reader(:id)
+  attr_accessor(:name, :birthday)
 
   def initialize(attributes)
     @id = attributes.fetch(:id)
@@ -25,8 +26,12 @@ class Patron
   end
 
   def save
-    result = DB.exec("INSERT INTO patrons (name, birthday) VALUES ('#{@name}', '#{@birthday}') RETURNING id;")
-    @id = result.first().fetch("id").to_i
+    if @id
+      DB.exec("UPDATE patrons SET name = '#{@name}' WHERE id = #{@id};")
+    else
+      result = DB.exec("INSERT INTO patrons (name, birthday) VALUES ('#{@name}', '#{@birthday}') RETURNING id;")
+      @id = result.first().fetch("id").to_i
+    end
   end
 
   def delete

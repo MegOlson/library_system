@@ -1,5 +1,5 @@
 class Checkout
-  attr_reader(:id, :due_date, :book_id, :patron_id)
+  attr_reader(:id,:due_date, :book_id, :patron_id)
   def initialize(attributes)
     @id = attributes.fetch(:id)
     @due_date = attributes.fetch(:due_date)
@@ -21,12 +21,8 @@ class Checkout
   end
 
   def save
-    # if @id
-    #   DB.exec("UPDATE checkout SET due_date = '#{@due_date}' WHERE id = #{@id}")
-    # else
-      result = DB.exec("INSERT INTO checkout (due_date, book_id, patron_id) VALUES ('#{@due_date}', #{@book_id}, #{@patron_id}) RETURNING id;")
-      @id = result.first().fetch("id").to_i
-    # end
+    result = DB.exec("INSERT INTO checkout (due_date, book_id, patron_id) VALUES ('#{@due_date}', #{@book_id}, #{@patron_id}) RETURNING id;")
+    @id = result.first().fetch("id").to_i
   end
 
   def ==(another_checkout)

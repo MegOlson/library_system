@@ -17,6 +17,12 @@ describe("Patron") do
       patron.save()
       expect(Patron.all()).to(eq([patron]))
     end
+    it "updates a saved patron in the database" do
+      patron.save
+      patron.name = "Sue"
+      patron.save
+      expect(Patron.all()).to eq ([patron])
+    end
   end
 
   describe("#==") do

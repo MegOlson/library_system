@@ -20,7 +20,7 @@ class Book
     result = DB.exec("INSERT INTO books (title, author) VALUES ('#{@title}', '#{@author}') RETURNING id;")
     @id = result.first().fetch("id").to_i
   end
-  def ==(another_doctor)
-   self.title().==(another_doctor.title()).&(self.id().==(another_doctor.id()))
+  def ==(another_book)
+   self.title().==(another_book.title()).&(self.id().==(another_book.id()))
  end
 end

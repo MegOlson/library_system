@@ -26,5 +26,20 @@ describe("Checkout") do
     expect(checkout1).to(eq(checkout2))
     end
   end
+  describe(".list_of_books") do
+    it("returns list of checkouted books") do
+      book1 = Book.new({:title => "Emma", :author => "Jane Eyre", :id => 1})
+      book1.save
+
+      book2 = Book.new({:title => "Emma", :author => "Jane Eyre", :id => 2})
+      book2.save
+      checkout1 = Checkout.new({:id => nil, :due_date => "2017-04-20", :book_id => 1, :patron_id => 1})
+      checkout1.save
+      checkout2 = Checkout.new({:id => nil, :due_date => "2017-04-20", :book_id => 2, :patron_id => 2})
+      checkout2.save
+      expect(Checkout.list_of_books).to eq([checkout1, checkout2])
+    end
+
+    end
 
 end

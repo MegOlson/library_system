@@ -17,6 +17,12 @@ describe("Checkout") do
       checkout.save()
       expect(Checkout.all()).to(eq([checkout]))
     end
+    # it("updates a saved checkout") do
+    #   checkout.save
+    #   checkout.checked_in = true
+    #   checkout.save
+    #   expect(Checkout.all).to eq ([checkout])
+    # end
   end
 
   describe("#==") do
@@ -50,4 +56,13 @@ describe("Checkout") do
       expect(Checkout.overdue).to eq [overdue_checkout]
     end
   end
+
+  describe ("#delete") do
+    it("will delete checkout from database") do
+      checkout.save
+      checkout.delete
+      expect(Checkout.all).to eq ([])
+    end
+  end
+
 end

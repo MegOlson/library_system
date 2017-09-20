@@ -40,6 +40,10 @@ class Book
     checkout_list
   end
 
+  def checkin 
+    @checked_in = true
+  end
+
   def self.search_by_author(author)
     returned_books = DB.exec("SELECT * FROM books WHERE author = ('#{author}');")
     books = []

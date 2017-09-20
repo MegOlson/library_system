@@ -21,8 +21,12 @@ class Checkout
   end
 
   def save
-    result = DB.exec("INSERT INTO checkout (due_date, book_id, patron_id) VALUES ('#{@due_date}', #{@book_id}, #{@patron_id}) RETURNING id;")
-    @id = result.first().fetch("id").to_i
+    # if @id
+    #   DB.exec("UPDATE checkout SET due_date = '#{@due_date}' WHERE id = #{@id}")
+    # else
+      result = DB.exec("INSERT INTO checkout (due_date, book_id, patron_id) VALUES ('#{@due_date}', #{@book_id}, #{@patron_id}) RETURNING id;")
+      @id = result.first().fetch("id").to_i
+    # end
   end
 
   def ==(another_checkout)
@@ -54,6 +58,7 @@ class Checkout
     end
     results
   end
+
   def self.overdue
     today = Date.today.to_s
     results = DB.exec("SELECT * from checkout WHERE due_date <= '#{today}';")
@@ -66,6 +71,10 @@ class Checkout
       list.push(Checkout.new({:id => id, :due_date => due_date, :book_id => book_id, :patron_id => patron_id}))
     end
     list
+  end
+
+  def delete
+    DB.exec("DELETE FROM checkout WHERE id = #{@id};")
   end
 
 end

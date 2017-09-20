@@ -28,9 +28,9 @@
 * Program allows user to search book by title within database.
   * Example Input: book.search(:title)
   * Example Output: [book1] -->
-* Program allows user to check out a book from library and moves book from book table to checkout table.
+<!-- * Program allows user to check out a book from library and moves book from book table to checkout table.
   * Example Input: book.check_out()
-  * Example Output: checkout_table = [book1]
+  * Example Output: checkout_table = [book1] -->
 <!-- * Program allows user to view book checkout history.
   * Example Input: checkout.view_history()
   * Example Output: [book1, book2, book3] -->

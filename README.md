@@ -22,12 +22,12 @@
 * Program returns list of patrons.
   * Example Input: Patron.all()
   * Example Output: [patron1, patron2] -->
-* Program allows user to search for book by author within database.
+<!-- * Program allows user to search for book by author within database.
   * Example Input: book.search(:author)
   * Example Output: [book1, book2, book3]
 * Program allows user to search book by title within database.
   * Example Input: book.search(:title)
-  * Example Output: [book1]
+  * Example Output: [book1] -->
 * Program allows user to check out a book from library and moves book from book table to checkout table.
   * Example Input: book.check_out()
   * Example Output: checkout_table = [book1]

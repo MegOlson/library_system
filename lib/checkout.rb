@@ -29,16 +29,17 @@ class Checkout
       self.due_date().==(another_checkout.due_date()).&(self.id().==(another_checkout.id()))
   end
 
-  def self.list_of_books
-    book_list = []
-    result = DB.exec("SELECT * FROM books WHERE id = ('#{self.book_id}'); ")
-    result.each do |book|
-      id = book.fetch("id").to_i
-      title = book.fetch("title")
-      author = book.fetch("author")
-      book_list.push(Book.new({:id => id, :title => title, :author => author}))
+  def self.find(id)
+    book_result = DB.exec("SELECT * FROM checkout WHERE id = #{id};")
+    results = []
+    book_result.each do |result|
+      id = result.fetch("id").to_i
+      due_date = result.fetch("due_date")
+      book_id = result.fetch("book_id").to_i
+      patron_id = result.fetch("patron_id").to_i
+      results.push(Checkout.new({:id => id, :due_date => due_date, :book_id => book_id, :patron_id => patron_id}))
     end
-    book_list
+    results
   end
 
 end

@@ -42,4 +42,30 @@ class Checkout
     results
   end
 
+  def self.find_by_book(book_id)
+    book_result = DB.exec("SELECT * FROM checkout WHERE book_id = #{book_id};")
+    results = []
+    book_result.each do |result|
+      id = result.fetch("id").to_i
+      due_date = result.fetch("due_date")
+      book_id = result.fetch("book_id").to_i
+      patron_id = result.fetch("patron_id").to_i
+      results.push(Checkout.new({:id => id, :due_date => due_date, :book_id => book_id, :patron_id => patron_id}))
+    end
+    results
+  end
+  def self.overdue
+    today = Date.today.to_s
+    results = DB.exec("SELECT * from checkout WHERE due_date <= '#{today}';")
+    list = []
+    results.each do |result|
+      id = result.fetch("id").to_i
+      due_date = result.fetch("due_date")
+      book_id = result.fetch("book_id").to_i
+      patron_id = result.fetch("patron_id").to_i
+      list.push(Checkout.new({:id => id, :due_date => due_date, :book_id => book_id, :patron_id => patron_id}))
+    end
+    list
+  end
+
 end

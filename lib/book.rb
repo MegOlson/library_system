@@ -24,8 +24,12 @@ class Book
   end
 
   def save
-    result = DB.exec("INSERT INTO books (title, author) VALUES ('#{@title}', '#{@author}') RETURNING id;")
-    @id = result.first().fetch("id").to_i
+    if @id
+      DB.exec("UPDATE books SET checked_in = #{@checked_in} WHERE id = #{@id};")
+    else
+      result = DB.exec("INSERT INTO books (title, author) VALUES ('#{@title}', '#{@author}') RETURNING id;")
+      @id = result.first().fetch("id").to_i
+    end
   end
 
   def ==(another_book)

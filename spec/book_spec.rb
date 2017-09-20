@@ -17,6 +17,12 @@ describe("Book") do
       book.save()
       expect(Book.all()).to(eq([book]))
     end
+    it "updates a saved book's information in the database" do
+     book.save
+     book.checked_in = false
+     book.save
+     expect(Book.all).to eq [book]
+   end
   end
 
   describe("#==") do

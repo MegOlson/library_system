@@ -45,6 +45,14 @@ describe("Book") do
     end
   end
 
+  describe '#delete' do
+    it 'will delete book from database' do
+      book.save
+      book.delete
+      expect(Book.all).to eq []
+    end
+  end
+
   describe("#checkout") do
     it("creates a checkout record for a book and patron and mars ut as checked out") do
       book.save

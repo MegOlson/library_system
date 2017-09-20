@@ -40,8 +40,13 @@ class Book
     checkout_list
   end
 
-  def checkin 
+  def checkin
     @checked_in = true
+  end
+
+  def delete
+    DB.exec("DELETE FROM books WHERE id = #{@id};")
+    DB.exec("DELETE FROM checkout WHERE book_id = #{@id};")
   end
 
   def self.search_by_author(author)

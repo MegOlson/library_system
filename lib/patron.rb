@@ -1,5 +1,5 @@
 class Patron
-  
+
   attr_reader(:id, :name, :birthday)
 
   def initialize(attributes)
@@ -29,4 +29,8 @@ class Patron
     @id = result.first().fetch("id").to_i
   end
 
+  def delete
+    DB.exec("DELETE FROM patrons WHERE id = #{@id};")
+    DB.exec("DELETE FROM checkout WHERE patron_id = #{@id};")
+  end
 end

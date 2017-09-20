@@ -26,5 +26,12 @@ describe("Patron") do
       expect(patron1).to(eq(patron2))
     end
   end
-  
+
+  describe '#delete' do
+   it 'will delete patron from database' do
+     patron.save
+     patron.delete
+     expect(Patron.all).to eq []
+   end
+ end
 end

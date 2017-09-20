@@ -31,12 +31,18 @@
 * Program allows user to check out a book from library and moves book from book table to checkout table.
   * Example Input: book.check_out()
   * Example Output: checkout_table = [book1]
-* Program allows user to view book checkout history.
+<!-- * Program allows user to view book checkout history.
   * Example Input: checkout.view_history()
-  * Example Output: [book1, book2, book3]
+  * Example Output: [book1, book2, book3] -->
 * Program allows user to see when their checked out book is due.
   * Example Input: checkout.view()
   * Example Output: [book3, 2017-10-20]
-* Program allows user to see list of overdue books.
+<!-- * Program allows user to see list of overdue books.
   * Example Input: checkout.overdue()
-  * Example Output: [book1, book2, book3]
+  * Example Output: [book1, book2, book3] -->
+* Program allows user to update items in book inventory.
+  * Example Input: "Emmma"  
+  * Example Output: "Emma"
+* Program allows user to delete items in book inventory.
+  * Example Input: [book1, book2, book3]
+  * Example Output: [book1, book2]

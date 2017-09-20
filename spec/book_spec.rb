@@ -44,4 +44,14 @@ describe("Book") do
       expect(Book.search_by_title("Emma")).to eq([book1.title])
     end
   end
+
+  describe("#checkout") do
+    it("creates a checkout record for a book and patron and mars ut as checked out") do
+      book.save
+      checkout_list = book.checkout(1,"2017-09-30")
+      expect(Checkout.all).to eq ([checkout_list])
+      expect(book.checked_in).to eq (false)
+    end
+  end
+
 end

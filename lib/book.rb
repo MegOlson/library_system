@@ -1,11 +1,13 @@
 class Book
 
   attr_reader(:id, :title, :author)
+  attr_accessor(:checked_in)
 
   def initialize (attributes)
     @id = attributes.fetch(:id)
     @title = attributes.fetch(:title)
     @author = attributes.fetch(:author)
+    @checked_in = (attributes.has_key?(:checked_in) ? attributes[:checked_in] : true)
   end
 
   def self.all
@@ -15,6 +17,7 @@ class Book
       id = book.fetch("id").to_i
       title = book.fetch("title")
       author = book.fetch("author")
+      checked_in = book.fetch("checked_in")
       books.push(Book.new({:id => id, :title => title, :author => author}))
     end
     books
@@ -27,6 +30,14 @@ class Book
 
   def ==(another_book)
    self.title().==(another_book.title()).&(self.id().==(another_book.id()))
+  end
+
+  def checkout(patron_id, due_date)
+    today = Date.today
+    checkout_list = Checkout.new({:id => nil, :due_date => due_date, :book_id => @id, :patron_id => patron_id})
+    checkout_list.save
+    @checked_in = false
+    checkout_list
   end
 
   def self.search_by_author(author)

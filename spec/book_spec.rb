@@ -75,5 +75,11 @@ describe("Book") do
       expect(book.checked_in).to eq (false)
     end
   end
+  describe ".find" do
+   it "finds checkouts by its id" do
+     book.save
+     expect(Book.find(book.id)).to eq [book]
+     end
+   end
 
 end

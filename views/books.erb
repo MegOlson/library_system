@@ -9,7 +9,7 @@
   <ul>
     <% @books.each do |book| %>
       <li>
-        <a href="/<% @user %>/books/<% book.id %>"><%= book.title %></a>
+        <a href="books/<%=book.id%>"><%= book.title %></a>
       </li>
     <% end %>
   </ul>

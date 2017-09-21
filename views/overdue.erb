@@ -1,0 +1,13 @@
+<% if @books.any? %>
+  <ul>
+    <% @books.each do |book| %>
+      <li>
+        <a href="/<% @user %>/books/<% book.id %>"><%= book.title %></a>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no books logged in the library system.</p>
+<% end %>
+
+<a href="/">Library Home</a>

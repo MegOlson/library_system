@@ -80,4 +80,17 @@ class Book
   books
   end
 
+  def self.find(id)
+    book_result = DB.exec("SELECT * FROM books WHERE id = #{id};")
+    results = []
+    book_result.each do |book|
+      id = book.fetch("id").to_i
+      title = book.fetch("title")
+      author = book.fetch("author")
+      checked_in = book.fetch("checked_in")
+      results.push(Book.new({:id => id, :title => title, :author => author}))
+    end
+    results
+  end
+
 end

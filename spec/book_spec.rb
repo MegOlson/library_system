@@ -59,6 +59,14 @@ describe("Book") do
     end
   end
 
+  describe '#update' do
+    it 'will update a book from the database' do
+      book.save
+      book.update({:title => "Pride and Prejudice"})
+      expect(book.title).to eq("Pride and Prejudice")
+    end
+  end
+
   describe("#checkout") do
     it("creates a checkout record for a book and patron and mars ut as checked out") do
       book.save

@@ -2,7 +2,7 @@ require 'rspec'
 require 'pg'
 require 'book'
 require 'patron'
-require 'checkout'
+require 'checkout' 
 
 DB = PG.connect({:dbname => "library_system_test"})
 

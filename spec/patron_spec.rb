@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+  
 describe("Patron") do
   let(:patron) {Patron.new({:id => nil, :name => "Suzie", :birthday => "2004-04-20"})}
   it("creates instance of patron with Patron class when given name and birthday") do

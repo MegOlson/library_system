@@ -1,7 +1,7 @@
 class Book
 
-  attr_reader(:id, :title, :author)
-  attr_accessor(:checked_in)
+  attr_reader(:id)
+  attr_accessor(:checked_in, :title, :author)
 
   def initialize (attributes)
     @id = attributes.fetch(:id)
@@ -51,6 +51,12 @@ class Book
   def delete
     DB.exec("DELETE FROM books WHERE id = #{@id};")
     DB.exec("DELETE FROM checkout WHERE book_id = #{@id};")
+  end
+
+  def update(attributes)
+    @title = attributes.fetch(:title, @title)
+    @id = self.id()
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{@id};")
   end
 
   def self.search_by_author(author)

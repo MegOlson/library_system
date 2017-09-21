@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+ 
 describe("Checkout") do
   let(:checkout) {Checkout.new({:id => nil, :due_date => "2017-09-29", :book_id => 1, :patron_id => 1})}
   it("creates instance of checkout with Checkout class when given id and due date") do

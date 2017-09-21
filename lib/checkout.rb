@@ -1,4 +1,4 @@
-class Checkout
+class Checkout 
   attr_reader(:id,:due_date, :book_id, :patron_id)
   def initialize(attributes)
     @id = attributes.fetch(:id)

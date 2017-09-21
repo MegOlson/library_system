@@ -27,6 +27,10 @@ get('/library') do
   erb(:library)
 end
 
+get('/checkouts') do
+  erb(:checkouts)
+end
+
 get('/librarian/books') do
   @user = "librarian"
   @books = Book.all
@@ -86,6 +90,7 @@ patch('/:patron_id/:book_id/checkout') do
   book_id = params[:book_id].to_i
   due_date = params[:due_date]
   book = Book.find(book_id).first
+  
   book.checkout(patron_id, due_date)
   redirect "#{patron_id}/books/#{book_id}"
 end

@@ -39,11 +39,6 @@ get('/patron/books') do
   erb(:library)
 end
 
-get ('/books/:book_id') do
-  @book = Book.find(params.fetch(:book_id).to_i())
-  erb(:success)
-end
-
 get('/patrons') do
   erb(:patrons)
 end
@@ -72,7 +67,55 @@ post('/book/add') do
   redirect "/librarian/books"
 end
 
+get('/:user/patrons/:id') do
+  id = params[:id].to_i
+  @user = params[:user]
+  @patron = Patron.find(id).first
+  erb(:patron)
+end
 
-# get('/librarian/overdue')
-# @overdue = C
+get('/:user/books/:id') do
+  id = params[:id].to_i
+  @user = params[:user]
+  @book = Book.find(id).first
+  erb(:book)
+end
+
+patch('/:patron_id/:book_id/checkout') do
+  patron_id = params[:patron_id].to_i
+  book_id = params[:book_id].to_i
+  due_date = params[:due_date]
+  book1 = Book.find(book_id).first
+  book1.checkout(due_date, patron_id)
+
+  redirect "#{patron_id}/books/#{book_id}"
+end
+
+get('/librarian/patrons/:id/edit') do
+  id = params[:id].to_i
+  @patron = Patron.find(id).first
+  erb(:edit_patron)
+end
+
+# patch('/patrons/:id') do
+#   id = params[:id].to_i
+#   patron = Patron.find(id).first
+#   patron.name = params['name']
+#   patron.bithday = params['birthday']
+#   patron.save
+#   redirect "/librarian/patrons/#{patron.id}"
+# end
+#
+# delete('/admin/patrons/:id') do
+#   id = params[:id].to_i
+#   patron = Patron.find(id).first
+#   patron.delete
+#   redirect "/admin/patrons"
+# end
+#
+# delete('/admin/books/:id') do
+#   id = params[:id].to_i
+#   book = Book.find(id).first
+#   book.delete
+#   redirect "/admin/books"
 # end

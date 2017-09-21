@@ -1,4 +1,4 @@
-class Checkout 
+class Checkout
   attr_reader(:id,:due_date, :book_id, :patron_id)
   def initialize(attributes)
     @id = attributes.fetch(:id)
@@ -18,6 +18,11 @@ class Checkout
       checkouts.push(Checkout.new({:id => id, :due_date => due_date, :book_id => book_id, :patron_id => patron_id}))
     end
     checkouts
+  end
+
+  def due_date_calc
+    @due_date = Date.today + 20
+    @due_date.to_s
   end
 
   def save

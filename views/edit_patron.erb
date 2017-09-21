@@ -1,0 +1,16 @@
+<h1>Update Patron</h1>
+
+<form action="/patrons/<%= @patron.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="birthday">Birthday</label>
+    <input type="text" name="birthday" class="form-control">
+  </div>
+
+  <button type="submit" class="btn">Update Patron</button>
+</form>

@@ -6,7 +6,7 @@
   <ul>
     <% @books.each do |book| %>
       <li>
-        <a href="/books/<%= :book_id %>"><%= book.title %></a>
+        <a href="/<%= @user %>/books/<%= book.id %>"><%= book.title %></a>
       </li>
     <% end %>
   </ul>

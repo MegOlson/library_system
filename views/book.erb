@@ -1,0 +1,48 @@
+<h1>Book Record</h1>
+
+<% if @user == "librarian" %>
+  <form action="/librarian/books/<%= @book.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn">Delete</button>
+  </form>
+<% end %>
+
+<p><strong>Title:</strong> <em><%= @book.title %></em></p>
+<p><strong>Author</strong> <%= @book.author %></p>
+<p><strong>
+  <%= @book.checkin ? "Checked In" : "Checked Out" %>
+</strong></p>
+
+<% if @user == "librarian" %>
+  <p><strong>Checkout Log:</strong></p>
+  <% if @book.checkout.any? %>
+    <ul>
+      <% @book.checkout.each do |record| %>
+        <% patron = Patron.find(record.patron_id).first %>
+        <li>
+          <strong><%= patron.name %></strong> due <%= record.due_date %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% else %>
+  <% if @book.checkin %>
+    <form action="/<%= @user %>/<%= @book.id %>/checkout" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <button type="submit" class="btn">Check Out</button>
+    </form>
+  <% else %>
+    <form action="/<%= @user %>/<%= @book.id %>/checkin" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <button type="submit" class="btn">Check In</button>
+    </form>
+  <% end %>
+<% end %>
+<p><a href="/<%= @user %>/books">Back to books list</a></p>
+
+<% if @user == "librarian" %>
+  <a href="/librarian"><button type="button" class="btn">Librarian's place</button></a>
+<% else %>
+  <a href="/patron/patrons/<%= @user %>"><button type="button" class="btn">Patron's Home</button></a>
+<% end %>
+<a href="/"><button type="button" class="btn">Home</button></a>

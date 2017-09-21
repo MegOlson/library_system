@@ -85,9 +85,8 @@ patch('/:patron_id/:book_id/checkout') do
   patron_id = params[:patron_id].to_i
   book_id = params[:book_id].to_i
   due_date = params[:due_date]
-  book1 = Book.find(book_id).first
-  book1.checkout(due_date, patron_id)
-
+  book = Book.find(book_id).first
+  book.checkout(patron_id, due_date)
   redirect "#{patron_id}/books/#{book_id}"
 end
 
@@ -97,25 +96,25 @@ get('/librarian/patrons/:id/edit') do
   erb(:edit_patron)
 end
 
-# patch('/patrons/:id') do
-#   id = params[:id].to_i
-#   patron = Patron.find(id).first
-#   patron.name = params['name']
-#   patron.bithday = params['birthday']
-#   patron.save
-#   redirect "/librarian/patrons/#{patron.id}"
-# end
-#
-# delete('/admin/patrons/:id') do
-#   id = params[:id].to_i
-#   patron = Patron.find(id).first
-#   patron.delete
-#   redirect "/admin/patrons"
-# end
-#
-# delete('/admin/books/:id') do
-#   id = params[:id].to_i
-#   book = Book.find(id).first
-#   book.delete
-#   redirect "/admin/books"
-# end
+patch('/patrons/:id') do
+  id = params[:id].to_i
+  patron = Patron.find(id).first
+  patron.name = params['name']
+  patron.bithday = params['birthday']
+  patron.save
+  redirect "/librarian/patrons/#{patron.id}"
+end
+
+delete('/librarian/patrons/:id') do
+  id = params[:id].to_i
+  patron = Patron.find(id).first
+  patron.delete
+  redirect "/librarian/patrons"
+end
+
+delete('/librarian/books/:id') do
+  id = params[:id].to_i
+  book = Book.find(id).first
+  book.delete
+  redirect "/librarian/books"
+end

@@ -25,6 +25,18 @@ class Patron
     self.name().==(another_patron.name()).&(self.id().==(another_patron.id()))
   end
 
+  def self.find(id)
+    patron_result = DB.exec("SELECT * FROM patrons WHERE id = #{id};")
+    results = []
+    patron_result.each() do |patron|
+      id = patron.fetch("id").to_i
+      name = patron.fetch("name")
+      birthday = patron.fetch("birthday")
+      results.push(Patron.new({:id => id, :name => name, :birthday => birthday}))
+    end
+    results
+  end
+
   def save
     if @id
       DB.exec("UPDATE patrons SET name = '#{@name}' WHERE id = #{@id};")

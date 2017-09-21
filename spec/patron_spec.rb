@@ -1,5 +1,5 @@
 require 'spec_helper'
-  
+
 describe("Patron") do
   let(:patron) {Patron.new({:id => nil, :name => "Suzie", :birthday => "2004-04-20"})}
   it("creates instance of patron with Patron class when given name and birthday") do
@@ -40,4 +40,11 @@ describe("Patron") do
      expect(Patron.all).to eq []
    end
  end
+
+ describe '.find' do
+  it 'will find patron from database' do
+    patron.save
+    expect(Patron.find(patron.id)).to eq ([patron])
+  end
+  end
 end

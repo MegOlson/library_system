@@ -55,8 +55,9 @@ class Book
 
   def update(attributes)
     @title = attributes.fetch(:title, @title)
+    @author = attributes.fetch(:author, @author)
     @id = self.id()
-    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{@id};")
+    DB.exec("UPDATE books SET title = '#{@title}', author = '#{@author}' WHERE id = #{@id};")
   end
 
   def self.search_by_author(author)

@@ -1,5 +1,5 @@
 class Patron
- 
+
   attr_reader(:id)
   attr_accessor(:name, :birthday)
 

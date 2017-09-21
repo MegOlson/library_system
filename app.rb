@@ -39,11 +39,8 @@ get('/patron/books') do
   erb(:library)
 end
 
-get ('books/:id') do
-  # patron_id = params[:patron_id].to_i
-  # book_id = params[:book_id].to_i
-  # book = Book.find(book_id).first
-  @book = Book.find(params.fetch("id").to_i())
+get ('/books/:book_id') do
+  @book = Book.find(params.fetch(:book_id).to_i())
   erb(:success)
 end
 
